@@ -84,10 +84,14 @@ function Counter() {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalID = setInterval(() => {
       console.log('tick');
       setCounter((prevCounter) => prevCounter + 1);
     }, 1000);
+
+    return () => {
+      clearInterval(intervalID);
+    };
   }, []);
   return <h1>{counter}</h1>;
 }
